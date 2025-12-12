@@ -5,3 +5,16 @@ variables:
   SAST_EXCLUDED_PATHS: "frontend/src/assets/private/**"
   TEST_DISABLED: "true"
   DAST_DISABLED: "true"
+  
+stages:
+  - test
+test:
+  image: node:latest
+  stage: test
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+     - node_modules/
+  script:
+    - npm install
+    - npm test
